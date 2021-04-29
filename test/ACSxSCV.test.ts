@@ -24,16 +24,18 @@ describe('SCV x ACS', function () {
   // mocked wallets & addresses
   let owner: SignerWithAddress
   let pauser: SignerWithAddress
+  let operator: SignerWithAddress
   let someone: SignerWithAddress
-  let ownerAddress: string
+  let operatorAddress: string
   let pauserAddress: string
   let someoneAddress: string
 
   before(async () => {
-    ;[owner, pauser, someone] = await ethers.getSigners()
-    ownerAddress = await owner.getAddress()
+    ;[owner, pauser, operator, someone] = await ethers.getSigners()
+
     pauserAddress = await pauser.getAddress()
     someoneAddress = await someone.getAddress()
+    operatorAddress = await operator.getAddress()
   })
 
   it('Deploy Mocks', async () => {
@@ -81,37 +83,46 @@ describe('SCV x ACS', function () {
     await expect(iMinter.paused()).to.eventually.equal(false)
   })
 
-  it('Owner role needed', async () => {
+  it('OPERATOR_ROLE needed', async () => {
     const contract = iMinter.connect(someone)
 
-    await expect(contract.setAmount(STAKING_AMOUNT)).to.be.rejectedWith(
-      'admin role',
-    )
-    await expect(
-      contract.setBuyWithToken('0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee'),
-    ).to.be.rejectedWith('admin role')
-    await expect(contract.setPrice(BOT_PRICE)).to.be.rejectedWith('admin role')
+    const msg = 'operator role'
+    const addr = '0xeD24FC36d5Ee211Ea25A80239Fb8C4Cfd80f12Ee'
+    await expect(contract.setAmount(STAKING_AMOUNT)).to.be.rejectedWith(msg)
+    await expect(contract.setBuyWithToken(addr)).to.be.rejectedWith(msg)
+    await expect(contract.setPrice(BOT_PRICE)).to.be.rejectedWith(msg)
   })
 
-  it('Pauser role needed', async () => {
+  it('PAUSER_ROLE needed', async () => {
     const contract = iMinter.connect(someone)
     await expect(contract.pause()).to.be.rejectedWith('pauser role')
   })
 
-  it('Update successfully as owner', async () => {
+  it('Grant roles', async () => {
     const amt = ethers.utils.parseEther('1')
-    const contract = iMinter.connect(owner)
+    let contract = iMinter.connect(owner)
+    const OPERATOR_ROLE = await contract.OPERATOR_ROLE()
+    await contract.grantRole(OPERATOR_ROLE, operatorAddress)
+    const PAUSER_ROLE = await contract.PAUSER_ROLE()
+    await contract.grantRole(PAUSER_ROLE, pauserAddress)
 
+    await expect(
+      contract.hasRole(OPERATOR_ROLE, operatorAddress),
+    ).to.eventually.eq(true)
+    await expect(
+      contract.hasRole(PAUSER_ROLE, operatorAddress),
+    ).to.eventually.eq(false)
+  })
+
+  it('Update successfully with OPERATOR_ROLE', async () => {
+    const amt = ethers.utils.parseEther('1')
+    const contract = iMinter.connect(operator)
     await contract.setAmount(amt)
     await expect(contract.requiredTokenAmount()).to.eventually.eq(amt)
   })
 
   it('Pause successfully with PAUSER_ROLE', async () => {
-    let contract = iMinter.connect(owner)
-    const PAUSER_ROLE = await contract.PAUSER_ROLE()
-    await contract.grantRole(PAUSER_ROLE, pauserAddress)
-
-    contract = iMinter.connect(pauser)
+    const contract = iMinter.connect(pauser)
     await contract.pause()
     await expect(contract.paused()).to.eventually.eq(true)
   })

@@ -23,6 +23,7 @@ contract SCVxACSMinter is Context, AccessControl, Pausable {
 
     // Roles
     bytes32 public constant PAUSER_ROLE = keccak256('PAUSER_ROLE');
+    bytes32 public constant OPERATOR_ROLE = keccak256('OPERATOR_ROLE');
 
     // token and price for buying the NFT
     uint256 public requiredTokenAmount;
@@ -48,6 +49,7 @@ contract SCVxACSMinter is Context, AccessControl, Pausable {
         uint256 baseSpecId
     ) {
         _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
+        _setupRole(OPERATOR_ROLE, _msgSender());
         _setupRole(PAUSER_ROLE, _msgSender());
 
         // 0x7679381507af0c8DE64586A458161aa58D3A4FC3
@@ -129,8 +131,8 @@ contract SCVxACSMinter is Context, AccessControl, Pausable {
      */
     function setAmount(uint256 amount) public virtual {
         require(
-            hasRole(DEFAULT_ADMIN_ROLE, _msgSender()),
-            'must have admin role to change amount'
+            hasRole(OPERATOR_ROLE, _msgSender()),
+            'must have operator role to change amount'
         );
         requiredTokenAmount = amount;
     }
@@ -140,8 +142,8 @@ contract SCVxACSMinter is Context, AccessControl, Pausable {
      */
     function setBaseSpecId(uint256 baseSpecId) public virtual {
         require(
-            hasRole(DEFAULT_ADMIN_ROLE, _msgSender()),
-            'must have admin role to change amount'
+            hasRole(OPERATOR_ROLE, _msgSender()),
+            'must have operator role to change amount'
         );
         _baseSpecId = baseSpecId;
     }
@@ -151,8 +153,8 @@ contract SCVxACSMinter is Context, AccessControl, Pausable {
      */
     function setBuyWithToken(address token) public virtual {
         require(
-            hasRole(DEFAULT_ADMIN_ROLE, _msgSender()),
-            'must have admin role to change amount'
+            hasRole(OPERATOR_ROLE, _msgSender()),
+            'must have operator role to change amount'
         );
         buyWithToken = token;
     }
@@ -162,8 +164,8 @@ contract SCVxACSMinter is Context, AccessControl, Pausable {
      */
     function setPrice(uint256 price) public virtual {
         require(
-            hasRole(DEFAULT_ADMIN_ROLE, _msgSender()),
-            'must have admin role to change amount'
+            hasRole(OPERATOR_ROLE, _msgSender()),
+            'must have operator role to change amount'
         );
         botPrice = price;
     }
