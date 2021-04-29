@@ -1,0 +1,13 @@
+node_modules
+.next
+
+#Hardhat files
+cache
+artifacts/@openzeppelin
+artifacts/build-info
+artifacts/contracts
+artifacts/typechain
+bin
+generated
+
+.env
