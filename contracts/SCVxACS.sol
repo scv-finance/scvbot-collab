@@ -87,7 +87,8 @@ contract SCVxACSMinter is Context, AccessControl, Pausable {
      * unbalanced supply of different types
      */
     function getRandomSpecId() private view returns (uint256) {
-        uint256 seed = block.timestamp.mod(100);
+        bytes memory b = abi.encodePacked(block.timestamp, block.difficulty);
+        uint256 seed = uint256(keccak256(b)).mod(100);
         if (seed >= 95) {
             // 5%
             return 0;
