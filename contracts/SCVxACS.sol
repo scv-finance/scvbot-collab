@@ -6,6 +6,7 @@ import '@openzeppelin/contracts/access/AccessControl.sol';
 import '@openzeppelin/contracts/math/SafeMath.sol';
 import '@openzeppelin/contracts/utils/Context.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
+import '@openzeppelin/contracts/token/ERC20/SafeERC20.sol';
 import '@openzeppelin/contracts/utils/Pausable.sol';
 
 import './interface/IACSVault.sol';
@@ -20,6 +21,7 @@ import './interface/ISCVNFT.sol';
  */
 contract SCVxACSMinter is Context, AccessControl, Pausable {
     using SafeMath for uint256;
+    using SafeERC20 for IERC20;
 
     // Roles
     bytes32 public constant PAUSER_ROLE = keccak256('PAUSER_ROLE');
@@ -118,10 +120,10 @@ contract SCVxACSMinter is Context, AccessControl, Pausable {
         // transfer 80% to ACS
         uint256 amount0 = botPrice.mul(8).div(10);
         address acsAddr = IACSController(_acsController).rewards();
-        erc20.transferFrom(_msgSender(), acsAddr, amount0);
+        erc20.safeTransferFrom(_msgSender(), acsAddr, amount0);
         // transfer the rest to SCV
         uint256 amount1 = botPrice.sub(amount0);
-        erc20.transferFrom(_msgSender(), _scvReward, amount1);
+        erc20.safeTransferFrom(_msgSender(), _scvReward, amount1);
         // calc the specId from 0~3 and add to baseSpecId
         uint256 specId = _baseSpecId.add(getRandomSpecId());
         ISCVNFT(nftToken).mint(_msgSender(), specId);
