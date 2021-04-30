@@ -7,7 +7,6 @@ import 'hardhat-deploy'
 import 'hardhat-deploy-ethers'
 import 'hardhat-typechain'
 
-import { ethers } from 'ethers'
 import { task } from 'hardhat/config'
 
 // This is a sample Hardhat task. To learn how to create your own go to
@@ -16,20 +15,24 @@ task('verify-scv', 'Verify SCVxACS')
   .addParam('contract', 'The contract address of SCVxACSMinter')
   .setAction(async (args, hre) => {
     const contractAddress = args.contract
-    const addresses = require('./addresses.json')
     const chainId = hre.network.config.chainId
-    const { BUSD, ACSController, ACSVault, SCVNFT } = addresses[chainId]
-    const STAKING_AMOUNT = ethers.utils.parseEther('5')
-    const BOT_PRICE = ethers.utils.parseEther('10')
+    const params = require('./params.json')
+    const { BUSD, ACSController, ACSVault, SCVNFT, Staking, Price } = params[
+      chainId
+    ]
+    if (!(BUSD && ACSController && ACSVault && SCVNFT && Staking && Price)) {
+      console.error('Not enough address info in ./params.json')
+      return
+    }
 
     await hre.run('verify:verify', {
       address: contractAddress,
       constructorArguments: [
         ACSVault,
         ACSController,
-        STAKING_AMOUNT,
+        hre.ethers.utils.parseEther(Staking),
         BUSD,
-        BOT_PRICE,
+        hre.ethers.utils.parseEther(Price),
         SCVNFT,
         100,
       ],

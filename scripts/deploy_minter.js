@@ -6,12 +6,14 @@ async function deployMock(contract) {
   const receipt = await tx.deployTransaction.wait()
   console.log({ receipt })
   console.log('Contract deployed to:', iMock.address)
+  return iMock.address
 }
 
 async function main() {
   await deployMock('MockACS')
-  await deployMock('MockBUSD')
   await deployMock('MockNFT')
+  // There are B-USD on testnet that can be used
+  // await deployMock('MockBUSD')
 }
 
 main()

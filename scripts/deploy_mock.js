@@ -1,13 +1,12 @@
 async function main() {
-  const STAKING_AMOUNT = ethers.utils.parseEther('5')
-  const BOT_PRICE = ethers.utils.parseEther('10')
-
-  const addresses = require('../addresses.json')
   const { chainId } = await global.ethers.provider.getNetwork()
-  const { BUSD, ACSController, ACSVault, SCVNFT } = addresses[chainId]
+  const params = require('../params.json')
+  const { BUSD, ACSController, ACSVault, SCVNFT, Staking, Price } = params[
+    chainId
+  ]
 
-  if (!(BUSD && ACSController && ACSVault && SCVNFT)) {
-    console.error('Not enough address info in ./addresses.json')
+  if (!(BUSD && ACSController && ACSVault && SCVNFT && Staking && Price)) {
+    console.error('Not enough address info in ./params.json')
     return
   }
 
@@ -15,9 +14,9 @@ async function main() {
   const SCVxACSMinter = await MinterContract.deploy(
     ACSVault,
     ACSController,
-    STAKING_AMOUNT,
+    ethers.utils.parseEther(Staking),
     BUSD,
-    BOT_PRICE,
+    ethers.utils.parseEther(Price),
     SCVNFT,
     100,
   )

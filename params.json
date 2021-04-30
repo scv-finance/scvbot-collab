@@ -1,11 +1,15 @@
 {
   "56": {
+    "Staking": "5",
+    "Price": "10",
     "ACSVault": "0x7679381507af0c8DE64586A458161aa58D3A4FC3",
     "ACSController": "0xeb8f15086274586f95c551890A29077a5b6e5e55",
     "SCVNFT": "",
     "BUSD": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56"
   },
   "97": {
+    "Staking": "5",
+    "Price": "1",
     "ACSVault": "0x3bc609B02efE36A439209707aa4f9c8AAa4d032d",
     "ACSController": "0x3bc609B02efE36A439209707aa4f9c8AAa4d032d",
     "SCVNFT": "0xC72b46Dda58828A54B401E91B5F0766C0775e665",
