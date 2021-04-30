@@ -1,5 +1,3 @@
-import fs from 'fs'
-
 // used to deploy mocks
 async function deployMock(contract) {
   const MockContract = await global.ethers.getContractFactory(contract)
@@ -14,7 +12,7 @@ async function main() {
   const STAKING_AMOUNT = ethers.utils.parseEther('5')
   const BOT_PRICE = ethers.utils.parseEther('10')
 
-  const addresses = fs.readFileSync(`./addresses.json`)
+  const addresses = require('../addresses.json')
   const { chainId } = await global.ethers.provider.getNetwork()
   const { BUSD, ACSController, ACSVault, SCVNFT } = addresses[chainId]
 

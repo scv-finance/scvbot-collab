@@ -14,3 +14,10 @@ $ npm i
 $ npm run compile
 $ npm test
 ```
+
+## Deploy & Verify
+
+```bash
+$ npm run deploy:testnet
+$ npm run verify -- --network testnet --contract 0x....
+```

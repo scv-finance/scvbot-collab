@@ -4,6 +4,7 @@
   "main": "./index.ts",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-etherscan": "^2.1.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "@openzeppelin/contracts": "^3.4.0",
     "@typechain/ethers-v5": "6",
@@ -34,10 +35,9 @@
     "test": "hardhat test",
     "node": "hardhat node",
     "hardhat": "hardhat --network localhost",
-    "deploy:local": "hardhat run --network localhost scripts/deploy.js",
-    "deploy:goerli": "hardhat run --network goerli scripts/deploy.js",
-    "deploy:rinkeby": "hardhat run --network rinkeby scripts/deploy.js",
-    "deploy:mainnet": "hardhat run --network mainnet scripts/deploy.js"
+    "deploy:testnet": "hardhat run --network testnet scripts/deploy.js",
+    "deploy:mainnet": "hardhat run --network mainnet scripts/deploy.js",
+    "verify": "hardhat verify-scv"
   },
   "dependencies": {
     "@ethersproject/bignumber": "^5.0.14",
