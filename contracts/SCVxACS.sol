@@ -3,7 +3,6 @@
 pragma solidity ^0.8.4;
 
 import '@openzeppelin/contracts/access/AccessControl.sol';
-import '@openzeppelin/contracts/utils/math/SafeMath.sol';
 import '@openzeppelin/contracts/utils/Context.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import '@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol';
@@ -20,7 +19,6 @@ import './interface/ISCVNFT.sol';
  * choose a NFT spec
  */
 contract SCVxACSMinter is Context, AccessControl, Pausable {
-    using SafeMath for uint256;
     using SafeERC20 for IERC20;
 
     // Roles
@@ -81,7 +79,7 @@ contract SCVxACSMinter is Context, AccessControl, Pausable {
         // (balanceof / 10**decimals) * (getPricePerFullShare / 10**decimals)
         // as decimals = 18 in ACS token is fixed
         // to preserve the precision, share 1e18 as two 1e9
-        return balance.div(1e9).mul(ppfs.div(1e9));
+        return (balance / 1e9) * (ppfs / 1e9);
     }
 
     /**
@@ -90,7 +88,7 @@ contract SCVxACSMinter is Context, AccessControl, Pausable {
      */
     function getRandomSpecId() private view returns (uint256) {
         bytes memory b = abi.encodePacked(block.timestamp, block.difficulty);
-        uint256 seed = uint256(keccak256(b)).mod(100);
+        uint256 seed = uint256(keccak256(b)) % 100;
         if (seed >= 95) {
             // 5%
             return 0;
@@ -118,14 +116,14 @@ contract SCVxACSMinter is Context, AccessControl, Pausable {
         );
         IERC20 erc20 = IERC20(buyWithToken);
         // transfer 80% to ACS
-        uint256 amount0 = botPrice.mul(8).div(10);
+        uint256 amount0 = (botPrice * 8) / 10;
         address acsAddr = IACSController(_acsController).rewards();
         erc20.safeTransferFrom(_msgSender(), acsAddr, amount0);
         // transfer the rest to SCV
-        uint256 amount1 = botPrice.sub(amount0);
+        uint256 amount1 = botPrice - amount0;
         erc20.safeTransferFrom(_msgSender(), _scvReward, amount1);
         // calc the specId from 0~3 and add to baseSpecId
-        uint256 specId = _baseSpecId.add(getRandomSpecId());
+        uint256 specId = _baseSpecId + getRandomSpecId();
         ISCVNFT(nftToken).mint(_msgSender(), specId);
     }
 
