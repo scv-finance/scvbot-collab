@@ -16,5 +16,5 @@
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.js", "**/*.json"],
   "exclude": ["bin/**", "artifacts/**"],
-  "files": ["./hardhat.config.ts", "./addresses.json"]
+  "files": ["./hardhat.config.ts"]
 }

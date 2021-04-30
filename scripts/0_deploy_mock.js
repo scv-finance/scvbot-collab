@@ -5,7 +5,7 @@ async function deployMock(contract) {
   const tx = await iMock.deployed()
   const receipt = await tx.deployTransaction.wait()
   console.log({ receipt })
-  console.log('Contract deployed to:', iMock.address)
+  console.log(`Contract ${contract} deployed to: ${iMock.address}`)
   return iMock.address
 }
 

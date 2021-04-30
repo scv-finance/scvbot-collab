@@ -1,43 +1,44 @@
 require('dotenv-extended').load()
-import '@nomiclabs/hardhat-ethers'
+
+// import '@nomiclabs/hardhat-ethers'
 import '@nomiclabs/hardhat-etherscan'
 import '@nomiclabs/hardhat-waffle'
 import '@typechain/ethers-v5'
-import 'hardhat-deploy'
-import 'hardhat-deploy-ethers'
+// import 'hardhat-deploy'
+// import 'hardhat-deploy-ethers'
 import 'hardhat-typechain'
 
-import { task } from 'hardhat/config'
+// import { task } from 'hardhat/config'
 
-// This is a sample Hardhat task. To learn how to create your own go to
-// https://hardhat.org/guides/create-task.html
-task('verify-scv', 'Verify SCVxACS')
-  .addParam('contract', 'The contract address of SCVxACSMinter')
-  .setAction(async (args, hre) => {
-    const contractAddress = args.contract
-    const chainId = hre.network.config.chainId
-    const params = require('./params.json')
-    const { BUSD, ACSController, ACSVault, SCVNFT, Staking, Price } = params[
-      chainId
-    ]
-    if (!(BUSD && ACSController && ACSVault && SCVNFT && Staking && Price)) {
-      console.error('Not enough address info in ./params.json')
-      return
-    }
+// // This is a sample Hardhat task. To learn how to create your own go to
+// // https://hardhat.org/guides/create-task.html
+// task('verify-scv', 'Verify SCVxACS')
+//   .addParam('contract', 'The contract address of SCVxACSMinter')
+//   .setAction(async (args, hre) => {
+//     const contractAddress = args.contract
+//     const chainId = hre.network.config.chainId
+//     const params = require('./params.json')
+//     const { BUSD, ACSController, ACSVault, SCVNFT, Staking, Price } = params[
+//       chainId
+//     ]
+//     if (!(BUSD && ACSController && ACSVault && SCVNFT && Staking && Price)) {
+//       console.error('Not enough address info in ./params.json')
+//       return
+//     }
 
-    await hre.run('verify:verify', {
-      address: contractAddress,
-      constructorArguments: [
-        ACSVault,
-        ACSController,
-        hre.ethers.utils.parseEther(Staking),
-        BUSD,
-        hre.ethers.utils.parseEther(Price),
-        SCVNFT,
-        100,
-      ],
-    })
-  })
+//     await hre.run('verify:verify', {
+//       address: contractAddress,
+//       constructorArguments: [
+//         ACSVault,
+//         ACSController,
+//         hre.ethers.utils.parseEther(Staking),
+//         BUSD,
+//         hre.ethers.utils.parseEther(Price),
+//         SCVNFT,
+//         100,
+//       ],
+//     })
+//   })
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
@@ -88,6 +89,6 @@ export default {
     target: 'ethers-v5',
   },
   etherscan: {
-    apiKey: process.env.BSCSCAN_API,
+    apiKey: process.env.BSCSCAN_KEY,
   },
 }
