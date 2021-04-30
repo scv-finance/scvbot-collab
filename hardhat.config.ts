@@ -31,17 +31,17 @@ export default {
       url: 'http://127.0.0.1:7545',
       // accounts: [privateKey1, privateKey2, ...]
     },
-    goerli: {
-      url: 'https://rpc.slock.it/goerli',
-      accounts: [process.env.PRIVATE_KEY_GOERLI].filter(Boolean),
-    },
-    rinkeby: {
-      url: process.env.RPC_ENDPOINT_RINKEBY || '',
-      accounts: [process.env.PRIVATE_KEY_RINKEBY].filter(Boolean),
-    },
     mainnet: {
-      url: process.env.RPC_ENDPOINT_MAINNET || '',
-      accounts: [process.env.PRIVATE_KEY_MAINNET].filter(Boolean),
+      url: 'https://bsc-dataseed.binance.org/',
+      chainId: 56,
+      gasPrice: 20000000000,
+      accounts: [process.env.MAINNET_PRIVATE_KEY].filter(Boolean),
+    },
+    testnet: {
+      url: 'https://data-seed-prebsc-1-s1.binance.org:8545',
+      chainId: 97,
+      gasPrice: 20000000000,
+      accounts: [process.env.TESTNET_PRIVATE_KEY].filter(Boolean),
     },
   },
   paths: {
