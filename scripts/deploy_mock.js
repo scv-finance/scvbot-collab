@@ -1,13 +1,3 @@
-// used to deploy mocks
-async function deployMock(contract) {
-  const MockContract = await global.ethers.getContractFactory(contract)
-  const iMock = await MockContract.deploy()
-  const tx = await iMock.deployed()
-  const receipt = await tx.deployTransaction.wait()
-  console.log({ receipt })
-  console.log('Contract deployed to:', iMock.address)
-}
-
 async function main() {
   const STAKING_AMOUNT = ethers.utils.parseEther('5')
   const BOT_PRICE = ethers.utils.parseEther('10')
