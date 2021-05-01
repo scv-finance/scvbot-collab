@@ -171,6 +171,17 @@ contract SCVxACSMinter is Context, AccessControl, Pausable {
         botPrice = price;
     }
 
+    /**
+     * @dev Set a new `nft` token address to mint the NFT
+     */
+    function setNFTToken(address nft) public virtual {
+        require(
+            hasRole(OPERATOR_ROLE, _msgSender()),
+            'must have operator role to change nft token'
+        );
+        nftToken = nft;
+    }
+
     function pause() public virtual {
         require(
             hasRole(PAUSER_ROLE, _msgSender()),

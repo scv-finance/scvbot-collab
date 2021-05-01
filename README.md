@@ -18,6 +18,10 @@ $ npm test
 ## Deploy & Verify
 
 ```bash
-$ npm run deploy:testnet
-$ npm run verify -- --network testnet --contract 0x....
+$ npx hardhat run --network testnet scripts/1_deploy_minter.js
+$ npx hardhat verify --network testnet --constructor-args args/args-97.js 0x62...
 ```
+
+## Production
+
+- [SCVxACSMinter](https://bscscan.com/address/0x7EaE203A57ffB625224d2bba6776b3e08E8Fac87#code)

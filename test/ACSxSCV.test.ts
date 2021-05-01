@@ -91,6 +91,7 @@ describe('SCV x ACS', function () {
     await expect(contract.setAmount(STAKING_AMOUNT)).to.be.rejectedWith(msg)
     await expect(contract.setBuyWithToken(addr)).to.be.rejectedWith(msg)
     await expect(contract.setPrice(BOT_PRICE)).to.be.rejectedWith(msg)
+    await expect(contract.setNFTToken(addr)).to.be.rejectedWith(msg)
   })
 
   it('PAUSER_ROLE needed', async () => {
