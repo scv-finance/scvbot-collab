@@ -4,41 +4,7 @@ require('dotenv-extended').load()
 import '@nomiclabs/hardhat-etherscan'
 import '@nomiclabs/hardhat-waffle'
 import '@typechain/ethers-v5'
-// import 'hardhat-deploy'
-// import 'hardhat-deploy-ethers'
 import 'hardhat-typechain'
-
-// import { task } from 'hardhat/config'
-
-// // This is a sample Hardhat task. To learn how to create your own go to
-// // https://hardhat.org/guides/create-task.html
-// task('verify-scv', 'Verify SCVxACS')
-//   .addParam('contract', 'The contract address of SCVxACSMinter')
-//   .setAction(async (args, hre) => {
-//     const contractAddress = args.contract
-//     const chainId = hre.network.config.chainId
-//     const params = require('./params.json')
-//     const { BUSD, ACSController, ACSVault, SCVNFT, Staking, Price } = params[
-//       chainId
-//     ]
-//     if (!(BUSD && ACSController && ACSVault && SCVNFT && Staking && Price)) {
-//       console.error('Not enough address info in ./params.json')
-//       return
-//     }
-
-//     await hre.run('verify:verify', {
-//       address: contractAddress,
-//       constructorArguments: [
-//         ACSVault,
-//         ACSController,
-//         hre.ethers.utils.parseEther(Staking),
-//         BUSD,
-//         hre.ethers.utils.parseEther(Price),
-//         SCVNFT,
-//         100,
-//       ],
-//     })
-//   })
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
@@ -65,7 +31,7 @@ export default {
     mainnet: {
       url: 'https://bsc-dataseed.binance.org/',
       chainId: 56,
-      gasPrice: 5000000000,
+      gasPrice: 10000000000,
       accounts: [process.env.MAINNET_PRIVATE_KEY].filter(Boolean),
     },
     testnet: {

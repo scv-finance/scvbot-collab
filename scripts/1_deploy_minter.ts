@@ -1,12 +1,14 @@
+import { ethers } from 'hardhat'
+
 async function main() {
-  const { chainId } = await global.ethers.provider.getNetwork()
-  const args = require(`../args/args-${chainId}`)
+  const { chainId } = await ethers.provider.getNetwork()
+  const args = require(`../args/acs-${chainId}`)
   console.log(
     `Deploying to chain ${chainId}`,
     `with args = ${JSON.stringify(args, null, 2)}...`,
   )
 
-  const MinterContract = await global.ethers.getContractFactory('SCVxACSMinter')
+  const MinterContract = await ethers.getContractFactory('SCVxACSMinter')
   const SCVxACSMinter = await MinterContract.deploy(...args)
   const tx = await SCVxACSMinter.deployed()
   await tx.deployTransaction.wait()

@@ -1,6 +1,8 @@
+import { ethers } from 'hardhat'
+
 // used to deploy mocks
-async function deployMock(contract) {
-  const MockContract = await global.ethers.getContractFactory(contract)
+async function deployMock(contract: string) {
+  const MockContract = await ethers.getContractFactory(contract)
   const iMock = await MockContract.deploy()
   const tx = await iMock.deployed()
   const receipt = await tx.deployTransaction.wait()
