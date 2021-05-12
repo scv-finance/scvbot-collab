@@ -10,6 +10,7 @@ async function main() {
 
   const MinterContract = await ethers.getContractFactory('ERC20Minter')
   const minter = await MinterContract.deploy(...args)
+  console.log(`Waiting for transaction ${minter.deployTransaction.hash}`)
   await minter.deployTransaction.wait()
 
   console.log('Contract deployed to:', minter.address)

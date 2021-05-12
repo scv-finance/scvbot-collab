@@ -25,3 +25,4 @@ $ npx hardhat verify --network testnet --constructor-args args/args-97.js 0x62..
 ## Production
 
 - [SCVxACSMinter](https://bscscan.com/address/0x7EaE203A57ffB625224d2bba6776b3e08E8Fac87#code)
+- [ERC20Minter](https://bscscan.com/address/0x71a09D1a2cAEDd5ac00Ef3865F9E7f33D2CAa3Fc#code)
