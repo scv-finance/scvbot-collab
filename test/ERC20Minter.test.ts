@@ -147,6 +147,9 @@ describe('ERC20Minter', function () {
     const amt = ethers.utils.parseEther('10')
     await contract.transfer(someoneAddress, amt)
     await expect(contract.balanceOf(someoneAddress)).to.eventually.eq(amt)
+
+    const minter = iMinter.connect(someone)
+    await expect(minter.amountInVault(someoneAddress)).to.eventually.eq(amt)
   })
 
   it('Mint token and fail for payBy balance', async () => {
