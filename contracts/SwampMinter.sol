@@ -3,6 +3,7 @@
 pragma solidity ^0.8.4;
 
 import './interface/ISCVNFT.sol';
+import './interface/ISwampFarm.sol';
 import './Minter.sol';
 
 /**
@@ -11,17 +12,15 @@ import './Minter.sol';
  * Random number generated from block.timestamp will be used to
  * choose a NFT spec
  */
-contract ERC20Minter is Minter {
-    using SafeERC20 for IERC20;
-
-    address public requiredToken;
+contract SwampMinter is Minter {
+    ISwampFarm public swampFarm;
 
     constructor(
-        address requiredToken_,
+        address swampFarm_,
         uint256 requiredTokenAmount_,
         address cpReward_
     ) Minter(requiredTokenAmount_, cpReward_) {
-        requiredToken = requiredToken_;
+        swampFarm = ISwampFarm(swampFarm_);
     }
 
     /**
@@ -33,18 +32,17 @@ contract ERC20Minter is Minter {
         override
         returns (uint256)
     {
-        IERC20 token = IERC20(requiredToken);
-        return token.balanceOf(addr);
+        return swampFarm.stakedWantTokens(2, addr);
     }
 
     /**
      * @dev Set a new token to check balance
      */
-    function setRequiredToken(address token) public virtual {
+    function setSwampFarm(address addr) public virtual {
         require(
             hasRole(OPERATOR_ROLE, _msgSender()),
-            'must have operator role to change required token'
+            'must have operator role to change swapm farm address'
         );
-        requiredToken = token;
+        swampFarm = ISwampFarm(addr);
     }
 }
