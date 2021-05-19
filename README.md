@@ -25,6 +25,8 @@ $ npx hardhat verify --network testnet --constructor-args args/args-97.js 0x62..
 ## Testnet
 
 - [SwampMinter](https://testnet.bscscan.com/address/0x4225C4DAdD6D0363C5641ff7D571e9A068037FF1#code)
+- [SCVBot](https://testnet.bscscan.com/address/0xe043eabed8b19d21363618e38e0ef8120c0de326)
+- [NFTSpecV1](https://testnet.bscscan.com/address/0xab3fb83537931767b6dda82dbd10a954f9267a74)
 
 ## Mainnet
 
