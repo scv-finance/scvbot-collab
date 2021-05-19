@@ -4,7 +4,7 @@ require('dotenv-extended').load()
 import '@nomiclabs/hardhat-etherscan'
 import '@nomiclabs/hardhat-waffle'
 import '@typechain/ethers-v5'
-import 'hardhat-typechain'
+import '@typechain/hardhat'
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
