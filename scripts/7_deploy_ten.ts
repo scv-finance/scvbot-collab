@@ -12,11 +12,13 @@ async function main() {
   await minter.deployTransaction.wait()
   console.log('Contract deployed to:', minter.address)
 
+  const minterAddress = minter.address
+
   // grant mint role to TenMinter
   const botAddress = '0xFe3EeA9f826E56cA5702aaD50659D801E4Ea9320'
-  const bot1 = (await ethers.getContractAt('ISCVBot', botAddress)) as ISCVNFT
-  console.log(`Granting MINT_ROLE to ${minter.address}`)
-  await bot1.grantRole(await bot1.MINT_ROLE(), minter.address)
+  const bot1 = (await ethers.getContractAt('ISCVNFT', botAddress)) as ISCVNFT
+  console.log(`Granting MINT_ROLE to ${minterAddress}`)
+  await bot1.grantRole(await bot1.MINT_ROLE(), minterAddress)
 }
 
 main()

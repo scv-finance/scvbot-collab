@@ -17,7 +17,7 @@ contract TenMinter is Minter {
   IWithBalanceOf public farm =
     IWithBalanceOf(0xd15C444F1199Ae72795eba15E8C1db44E47abF62);
 
-  constructor() Minter(2500e18, 0x3D9bF4b755DBB6BF01A95E864D456278902a633c) {
+  constructor() Minter(2500e18, 0x5ed6B80F0e8b1c7fdB783202d4a926BbED2d49ee) {
     baseSpecId = 41;
     cpShare = 5;
   }
