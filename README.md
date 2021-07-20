@@ -22,6 +22,10 @@ $ npx hardhat run --network testnet scripts/1_deploy_minter.js
 $ npx hardhat verify --network testnet --constructor-args args/args-97.js 0x62...
 ```
 
+## Prepare
+
+1. Setup specs in NFTSpecV1
+
 ## Testnet
 
 - [SCVBot](https://testnet.bscscan.com/address/0xe043eabed8b19d21363618e38e0ef8120c0de326)
@@ -36,4 +40,4 @@ $ npx hardhat verify --network testnet --constructor-args args/args-97.js 0x62..
 - [ERC20Minter](https://bscscan.com/address/0x71a09D1a2cAEDd5ac00Ef3865F9E7f33D2CAa3Fc#code)
 - [SwampMinter](https://bscscan.com/address/0x9B0128D10c300Fe01a40E09EefE8D401d9Db10b1#code)
 - [MerlinMinter](https://bscscan.com/address/0xF0170366d0F9571C6d8959df97f1f038E7fEbAd9#code)
-- [TenMinter]()
+- [TenMinter](https://bscscan.com/address/0x537000CD863C0CfCE0ec3eb8103229971260A8Ea#code)
