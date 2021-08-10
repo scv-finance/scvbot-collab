@@ -41,3 +41,4 @@ $ npx hardhat verify --network testnet --constructor-args args/args-97.js 0x62..
 - [SwampMinter](https://bscscan.com/address/0x9B0128D10c300Fe01a40E09EefE8D401d9Db10b1#code)
 - [MerlinMinter](https://bscscan.com/address/0xF0170366d0F9571C6d8959df97f1f038E7fEbAd9#code)
 - [TenMinter](https://bscscan.com/address/0x537000CD863C0CfCE0ec3eb8103229971260A8Ea#code)
+- [BSC.New Minter](https://bscscan.com/address/0x6b3D617A968218d5075E2367Da043e60C01596Ff#code)
