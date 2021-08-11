@@ -32,7 +32,7 @@ $ npx hardhat verify --network testnet --constructor-args args/args-97.js 0x62..
 - [NFTSpecV1](https://testnet.bscscan.com/address/0xab3fb83537931767b6dda82dbd10a954f9267a74)
 - [SwampMinter](https://testnet.bscscan.com/address/0x4225C4DAdD6D0363C5641ff7D571e9A068037FF1#code)
 - [MerlinMinter](https://testnet.bscscan.com/address/0xc18D73d8085725bD0b97A62a4EdC5b3F65244d13#code)
-- [TenMinter]()
+- [BSC.New Minter](https://testnet.bscscan.com/address/0x16EB276dFECee36B182B81F3981D91d7BEbB5398#code)
 
 ## Mainnet
 
