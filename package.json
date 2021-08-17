@@ -10,6 +10,7 @@
     "@openzeppelin/contracts": "^4.1.0",
     "@typechain/ethers-v5": "^7",
     "@typechain/hardhat": "^2",
+    "@types/async-csv": "^2.1.1",
     "@types/chai": "^4.2.15",
     "@types/chai-as-promised": "^7.1.3",
     "@types/mocha": "^8.2.1",
@@ -40,5 +41,8 @@
     "deploy:testnet": "hardhat run --network testnet scripts/deploy.js",
     "deploy:mainnet": "hardhat run --network mainnet scripts/deploy.js",
     "verify": "hardhat verify-scv"
+  },
+  "dependencies": {
+    "async-csv": "^2.1.3"
   }
 }
